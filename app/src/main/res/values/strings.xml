@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">CARGUESS</string>
+    <string name="identify">IDENTIFY</string>
+    <string name="car_images">car images</string>
+    <string name="car_names">Car Names</string>
+    <string name="label_correct">CORRECT!</string>
+    <string name="label_wrong">WRONG!</string>
+    <string name="next_button">NEXT</string>
+    <string name="end_text">YOU HAVE REACHED THE END</string>
+    <string name="submit">submit</string>
+    <string name="type_a_letter">Type a letter</string>
+    <string name="car_images_display_hints">car images</string>
+    <string name="next">Next</string>
+    <string name="img3">img3</string>
+    <string name="img2">img2</string>
+    <string name="img1">img1</string>
+</resources>

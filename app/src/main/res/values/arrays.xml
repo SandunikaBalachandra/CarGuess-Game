@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="car_names">
+        <item>audi</item>
+        <item>bmw</item>
+        <item>toyota</item>
+        <item>volkswagen</item>
+        <item>ferrari</item>
+        <item>ford</item>
+        <item>honda</item>
+        <item>mercedes</item>
+        <item>nissan</item>
+        <item>rolls-royce</item>
+
+    </string-array>
+</resources>
