@@ -2,6 +2,7 @@ package com.example.cars;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,12 +12,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Random;
 
 public class IdentifyTheCarImageActivity extends AppCompatActivity {
-    final Random rnd= new Random();
+    final Random rnd = new Random();
     String str1;
     String str2;
     String str3;
@@ -25,80 +25,87 @@ public class IdentifyTheCarImageActivity extends AppCompatActivity {
     TextView guess;
     Button next;
     //make instance of CarMakeActivity to get the hashmap created in that
-    CarMakeActivity cc=new CarMakeActivity();
+    CarMakeActivity cc = new CarMakeActivity();
     HashMap<String, String> carnamesmap = cc.getCarNamesmap();
+    ArrayList cars = new ArrayList(30);
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_identify_the_car_image);
-        next = (Button) findViewById(R.id.next);
-        carname = (TextView) findViewById(R.id.carName);
-        guess = (TextView) findViewById(R.id.guess);
+        next = findViewById(R.id.next);
+        carname = findViewById(R.id.carName);
+        guess = findViewById(R.id.guess);
 
-        ArrayList cars = new ArrayList(30);
+        if (cars.size()==30){
+            next.setEnabled(false);
+            finish();
+        }
+        setImages();
 
 
+    }
+
+    @SuppressLint("UseCompatLoadingForDrawables")
+    void setImages(){
         //random images
-        final ImageView img1 = (ImageView) findViewById(R.id.image1);
-        final ImageView img2 = (ImageView) findViewById(R.id.image2);
-        final ImageView img3 = (ImageView) findViewById(R.id.image3);
+        final ImageView img1 = findViewById(R.id.image1);
+        final ImageView img2 = findViewById(R.id.image2);
+        final ImageView img3 = findViewById(R.id.image3);
 
         do {
-            str1 = "img_" + (rnd.nextInt(30) - rnd.nextInt(5));
+            str1 = "img_" + (rnd.nextInt(30));
 
         } while (cars.contains(str1));
+
         cars.add(str1);
-
-
         img1.setImageDrawable
                 (
-                        getResources().getDrawable(getResourceID(str1, "drawable",
+                        getResources().getDrawable(getResourceID(str1,
                                 getApplicationContext()))
 
                 );
 
         do {
-            str2 = "img_" + (rnd.nextInt(30) - rnd.nextInt(5));
+            str2 = "img_" + (rnd.nextInt(30));
 
         } while (cars.contains(str2));
+
         cars.add(str2);
-
-
         img2.setImageDrawable
                 (
-                        getResources().getDrawable(getResourceID(str2, "drawable",
+                        getResources().getDrawable(getResourceID(str2,
                                 getApplicationContext()))
 
                 );
 
         do {
-            str3 = "img_" + (rnd.nextInt(30) - rnd.nextInt(5));
+            str3 = "img_" + (rnd.nextInt(30));
 
         } while (cars.contains(str3));
+
         cars.add(str3);
-
-
         img3.setImageDrawable
                 (
-                        getResources().getDrawable(getResourceID(str3, "drawable",
+                        getResources().getDrawable(getResourceID(str3,
                                 getApplicationContext()))
 
                 );
 
-        String imageGuess[]={str1,str2,str3};
-        str=imageGuess[rnd.nextInt(3)];
+        String imageGuess[] = {str1, str2, str3};
+        str = imageGuess[rnd.nextInt(3)];
+
 
         carname.setText(carnamesmap.get(str));
 
     }
 
-
     //set image resource id
     protected final static int getResourceID
-    (final String resName, final String resType, final Context ctx) {
+    (final String resName, final Context ctx) {
         final int ResourceID =
-                ctx.getResources().getIdentifier(resName, resType,
+                ctx.getResources().getIdentifier(resName, "drawable",
                         ctx.getApplicationInfo().packageName);
         if (ResourceID == 0) {
             throw new IllegalArgumentException
@@ -112,11 +119,11 @@ public class IdentifyTheCarImageActivity extends AppCompatActivity {
 
 
     public void clickImage1(View view) {
-        if (carnamesmap.get(str1).equals(carnamesmap.get(str))){
+        if (carnamesmap.get(str1).equals(carnamesmap.get(str))) {
             guess.setText("CORRECT!");
             guess.setTextColor(Color.GREEN);
 
-        }else{
+        } else {
             guess.setText("WRONG!");
             guess.setTextColor(Color.RED);
         }
@@ -125,18 +132,20 @@ public class IdentifyTheCarImageActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
+                setImages();
+                guess.setText("");
+                next.setEnabled(false);
+
             }
         });
     }
 
     public void clickImage2(View view) {
-        if (carnamesmap.get(str2).equals(carnamesmap.get(str))){
+        if (carnamesmap.get(str2).equals(carnamesmap.get(str))) {
             guess.setText("CORRECT!");
             guess.setTextColor(Color.GREEN);
 
-        }else{
+        } else {
             guess.setText("WRONG!");
             guess.setTextColor(Color.RED);
         }
@@ -145,19 +154,20 @@ public class IdentifyTheCarImageActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
+                setImages();
+                guess.setText("");
+                next.setEnabled(false);
             }
         });
 
     }
 
     public void clickImage3(View view) {
-        if (carnamesmap.get(str3).equals(carnamesmap.get(str))){
+        if (carnamesmap.get(str3).equals(carnamesmap.get(str))) {
             guess.setText("CORRECT!");
             guess.setTextColor(Color.GREEN);
 
-        }else{
+        } else {
             guess.setText("WRONG!");
             guess.setTextColor(Color.RED);
         }
@@ -166,9 +176,10 @@ public class IdentifyTheCarImageActivity extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
-                startActivity(getIntent());
+                setImages();
+                guess.setText("");
+                next.setEnabled(false);
             }
         });
-        }
     }
+}

@@ -2,6 +2,7 @@ package com.example.cars;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -14,11 +15,12 @@ import android.widget.TextView;
 
 import java.util.*;
 
+@SuppressLint("UseCompatLoadingForDrawables")
 public class CarMakeActivity extends AppCompatActivity {
 
     final Random rnd = new Random();
     String str;
-
+    ArrayList cars = new ArrayList(30);
     //hashmap stores value for image keys
    public static HashMap<String, String> carnamesmap = new HashMap<>();
    private void setCarnamesmap(){
@@ -58,6 +60,7 @@ public class CarMakeActivity extends AppCompatActivity {
         return carnamesmap;
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,59 +87,8 @@ public class CarMakeActivity extends AppCompatActivity {
                 R.layout.carname_spinner_row_nothing_selected, this));
 
         getCarNamesmap();
-//        //hashmap stores value for image keys
-//        HashMap<String, String> carnamesmap = new HashMap<>();
-//        carnamesmap.put("img_0", "ferrari");
-//        carnamesmap.put("img_5", "ferrari");
-//        carnamesmap.put("img_6", "ferrari");
-//        carnamesmap.put("img_9", "audi");
-//        carnamesmap.put("img_10", "audi");
-//        carnamesmap.put("img_11", "audi");
-//        carnamesmap.put("img_1", "bmw");
-//        carnamesmap.put("img_7", "bmw");
-//        carnamesmap.put("img_8", "bmw");
-//        carnamesmap.put("img_12", "ford");
-//        carnamesmap.put("img_13", "ford");
-//        carnamesmap.put("img_14", "ford");
-//        carnamesmap.put("img_2", "honda");
-//        carnamesmap.put("img_3", "honda");
-//        carnamesmap.put("img_4", "honda");
-//        carnamesmap.put("img_15", "mercedes");
-//        carnamesmap.put("img_16", "mercedes");
-//        carnamesmap.put("img_17", "mercedes");
-//        carnamesmap.put("img_18", "nissan");
-//        carnamesmap.put("img_19", "nissan");
-//        carnamesmap.put("img_20", "nissan");
-//        carnamesmap.put("img_21", "rolls-royce");
-//        carnamesmap.put("img_22", "rolls-royce");
-//        carnamesmap.put("img_23", "rolls-royce");
-//        carnamesmap.put("img_24", "toyota");
-//        carnamesmap.put("img_25", "toyota");
-//        carnamesmap.put("img_26", "toyota");
-//        carnamesmap.put("img_27", "volkswagen");
-//        carnamesmap.put("img_28", "volkswagen");
-//        carnamesmap.put("img_29", "volkswagen");
+        setImage();
 
-
-
-        ArrayList cars = new ArrayList(30);
-
-        //random images
-        final ImageView img = (ImageView) findViewById(R.id.car_make_images);
-
-        do {
-            str = "img_" + (rnd.nextInt(30) - rnd.nextInt(5));
-
-        } while (cars.contains(str));
-
-        cars.add(str);
-
-        img.setImageDrawable
-                (
-                        getResources().getDrawable(getResourceID(str, "drawable",
-                                getApplicationContext()))
-
-                );
 
         //Identify button event
         identify.setOnClickListener(new View.OnClickListener() {
@@ -152,8 +104,10 @@ public class CarMakeActivity extends AppCompatActivity {
                     identify.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            finish();
-                            startActivity(getIntent());
+                            setImage();
+                            identify.setText("Identify");
+                            label.setText("");
+
                         }
                     });
 
@@ -166,26 +120,47 @@ public class CarMakeActivity extends AppCompatActivity {
                     identify.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                             finish();
-                            startActivity(getIntent());
+                            setImage();
+                            identify.setText("Identify");
+                            label.setText("");
+                            correct_car_name.setText("");
                         }
                     });
                 }
             }
         });
 
-//        if (cars.size()==30){
-//            identify.setEnabled(false);
-//            label.setText(R.string.end_text);
-//        }
+        if (cars.size()==30){
+            identify.setEnabled(false);
+            finish();
+        }
 
+    }
+
+    void setImage(){
+        //random images
+        final ImageView img = (ImageView) findViewById(R.id.car_make_images);
+
+        do {
+            str = "img_" + (rnd.nextInt(30) );
+
+        } while (cars.contains(str));
+
+        cars.add(str);
+
+        img.setImageDrawable
+                (
+                        getResources().getDrawable(getResourceID(str,
+                                getApplicationContext()))
+
+                );
     }
 
     //set image resource id
     protected final static int getResourceID
-    (final String resName, final String resType, final Context ctx) {
+    (final String resName, final Context ctx) {
         final int ResourceID =
-                ctx.getResources().getIdentifier(resName, resType,
+                ctx.getResources().getIdentifier(resName, "drawable",
                         ctx.getApplicationInfo().packageName);
         if (ResourceID == 0) {
             throw new IllegalArgumentException

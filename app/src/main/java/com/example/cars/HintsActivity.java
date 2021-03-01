@@ -2,21 +2,19 @@ package com.example.cars;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
-import java.util.Scanner;
 
 public class HintsActivity extends AppCompatActivity {
 
@@ -29,6 +27,7 @@ public class HintsActivity extends AppCompatActivity {
     String attemptsLeft;
     Button submit;
     TextView attemptsLeftText;
+    ArrayList cars = new ArrayList(30);
 
     //make instance of CarMakeActivity to get the hashmap created in that
     CarMakeActivity cc=new CarMakeActivity();
@@ -46,36 +45,22 @@ public class HintsActivity extends AppCompatActivity {
         //displayed name
         wordDisplayed=String.valueOf(imageDsplayedCharArray);
     }
+    @SuppressLint("UseCompatLoadingForDrawables")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hints);
-         submit = (Button) findViewById(R.id.submit);
+         submit = findViewById(R.id.submit);
         text_car_name= findViewById(R.id.text_car_name);
         hint_dashes=findViewById(R.id.hint_dashes);
         attemptsLeftText=findViewById(R.id.label_hints);
 
+        if (cars.size()==30){
+            submit.setEnabled(false);
+            finish();
+        }
 
-
-    ArrayList cars = new ArrayList(30);
-
-
-        //random images
-    final ImageView img = (ImageView) findViewById(R.id.car_hints_images);
-
-        do {
-        str = "img_" + (rnd.nextInt(30) - rnd.nextInt(5));
-
-    } while (cars.contains(str));
-
-        cars.add(str);
-
-        img.setImageDrawable
-                (
-    getResources().getDrawable(getResourceID(str, "drawable",
-                               getApplicationContext()))
-
-            );
+        setImage();
 
         //char array
         imageDsplayedCharArray = (carnamesmap.get(str)).toCharArray();
@@ -92,7 +77,7 @@ public class HintsActivity extends AppCompatActivity {
         attemptsLeft = " X X X";
         attemptsLeftText.setText(attemptsLeft);
 
-    //Identify button event
+    //submit button event
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,6 +87,25 @@ public class HintsActivity extends AppCompatActivity {
         });
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
+    void setImage(){
+        //random images
+        final ImageView img = (ImageView) findViewById(R.id.car_hints_images);
+
+        do {
+            str = "img_" + (rnd.nextInt(30)) ;
+
+        } while (cars.contains(str));
+
+        cars.add(str);
+
+        img.setImageDrawable
+                (
+                        getResources().getDrawable(getResourceID(str,
+                                getApplicationContext()))
+
+                );
+    }
 
             private void displayeWord() {
                 String formattedString = "";
@@ -126,8 +130,9 @@ public class HintsActivity extends AppCompatActivity {
                             submit.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
-                                    finish();
-                                    startActivity(getIntent());
+                                    setImage();
+                                    ansTxt.setText("");
+                                    submit.setText("Submit");
                                 }
                             });
                         }
@@ -143,8 +148,10 @@ public class HintsActivity extends AppCompatActivity {
                         submit.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                finish();
-                                startActivity(getIntent());
+                                setImage();
+                                ansTxt.setText("");
+                                submit.setText("Submit");
+                                attemptsLeftText.setText("");
                             }
                         });
                     }
@@ -161,9 +168,9 @@ public class HintsActivity extends AppCompatActivity {
 
             //set image resource id
             protected final int getResourceID
-            (final String resName, final String resType, final Context ctx) {
+            (final String resName, final Context ctx) {
                 final int ResourceID =
-                        ctx.getResources().getIdentifier(resName, resType,
+                        ctx.getResources().getIdentifier(resName, "drawable",
                                 ctx.getApplicationInfo().packageName);
                 if (ResourceID == 0) {
                     throw new IllegalArgumentException
