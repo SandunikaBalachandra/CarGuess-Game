@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_car"
+    android:background="@drawable/background_car_landscape"
     tools:context=".MainActivity">
 
     <Button
@@ -12,12 +12,13 @@
         android:layout_width="342dp"
         android:layout_height="70dp"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="56dp"
         android:layout_marginEnd="160dp"
         android:backgroundTint="#FFFFFF"
         android:text="@string/car_make"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,12 +27,13 @@
         android:layout_width="342dp"
         android:layout_height="70dp"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="160dp"
         android:backgroundTint="#FFFFFF"
         android:text="@string/hints"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/car_make" />
 
@@ -40,12 +42,13 @@
         android:layout_width="342dp"
         android:layout_height="70dp"
         android:layout_marginStart="160dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="160dp"
         android:backgroundTint="#FFFFFF"
         android:text="@string/identify_the_car_image"
         android:textColor="#000000"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hints" />
 
@@ -62,8 +65,10 @@
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/identify_the_car_image" />
+        app:layout_constraintTop_toBottomOf="@+id/identify_the_car_image"
+        app:layout_constraintVertical_bias="0.685" />
 
     <Switch
         android:id="@+id/countdown"
@@ -71,20 +76,20 @@
         android:layout_height="26dp"
         android:background="@color/design_default_color_background"
         android:button="@color/black"
+        android:checked="true"
         android:contentDescription="@string/countdown_switch_button"
         android:outlineAmbientShadowColor="#FFFFFF"
         android:text="@string/countdown"
         android:textAlignment="center"
         android:textColor="#000000"
-        android:textStyle="bold"
-        android:checked="false"
         android:textOff="@string/off"
         android:textOn="@string/on"
+        android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/car_make"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.881"
+        app:layout_constraintHorizontal_bias="0.978"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.603"
+        app:layout_constraintVertical_bias="0.584"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 </androidx.constraintlayout.widget.ConstraintLayout>

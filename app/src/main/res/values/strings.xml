@@ -14,4 +14,27 @@
     <string name="img3">img3</string>
     <string name="img2">img2</string>
     <string name="img1">img1</string>
+    <string name="car_make">Car Make</string>
+    <string name="hints">Hints</string>
+    <string name="identify_the_car_image">Identify the Car Image</string>
+    <string name="advanced_level">Advanced Level</string>
+    <string name="countdown_switch_button">countdown switch button</string>
+    <string name="countdown">CountDown</string>
+    <string name="game_over">GAME OVER!</string>
+    <string name="splash_screen_portrait">splash screen portrait</string>
+    <string name="splash_screen_landscape">splash screen landscape</string>
+    <string name="off">OFF</string>
+    <string name="on">ON</string>
+    <string name="submit_advanced">Submit</string>
+    <string name="image_2_advanced">image 2</string>
+    <string name="image_1_advanced">image 1</string>
+    <string name="image_3_advanced">image 3</string>
+    <string name="type_car_name_2">Type car name</string>
+    <string name="type_car_name_1">Type car name</string>
+    <string name="type_car_name_3">Type car name</string>
+    <string name="submit_advanced_portrait">Submit</string>
+    <string name="image1_advanced">image1</string>
+    <string name="image2_advanced">image2</string>
+    <string name="image3_advanced">image3</string>
+    <string name="go_to_home">Go to Home</string>
 </resources>
